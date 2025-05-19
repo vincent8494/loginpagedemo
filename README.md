@@ -2,7 +2,7 @@
 
 A modern, responsive, and interactive login page with smooth animations and user feedback mechanisms. This project showcases a clean UI with engaging visual elements.
 
-![Login Page Preview](https://via.placeholder.com/800x500/1f2937/ffffff?text=Login+Page+Demo)
+
 
 ## ✨ Features
 
