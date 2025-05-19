@@ -1,0 +1,23 @@
+# Configuration for GitHub Pages
+# Minimal configuration to ensure Jekyll processes the site
+
+# Site settings
+title: Login Page Demo
+description: A simple login page demo
+
+# Build settings
+theme: jekyll-theme-primer
+plugins:
+  - jekyll-feed
+
+# Exclude from processing.
+# The following items will not be processed, by default. Create a custom list
+# to override the default setting.
+# exclude:
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules
+#   - vendor
+
+# Enable or disable the built-in Jekyll server web interface
+# web_interface: true
