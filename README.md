@@ -87,8 +87,3 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
-## 📧 Contact
-
-Your Name - [@your_twitter](https://twitter.com/your_twitter)
-
-Project Link: [https://github.com/vincent8494/loginpagedemo](https://github.com/vincent8494/loginpagedemo)
