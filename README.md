@@ -24,9 +24,23 @@ git clone https://github.com/vincent8494/loginpagedemo.git
 ## Technologies Used
 
 - HTML5
-- CSS3 (with CSS variables and animations)
-- JavaScript (ES6+)
-- Modern browser features (CSS Grid, Flexbox)
+- CSS3
+  - CSS Variables
+  - CSS Animations
+  - CSS Grid
+  - CSS Flexbox
+  - CSS Transitions
+- JavaScript
+  - ES6+
+  - DOM Manipulation
+  - Event Listeners
+  - Timer Functions
+- Modern Browser Features
+  - CSS Custom Properties
+  - CSS Transform
+  - CSS Keyframes
+  - CSS Box Shadow
+  - CSS Positioning
 
 ## Project Structure
 
