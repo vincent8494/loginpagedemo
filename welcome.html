@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <style>
+        :root {
+            --slate-900: #1f2937;
+            --slate-300: #d1d5db;
+            --white: #ffffff;
+            --success-color: #10b981;
+            --celebration-color-1: #10b981;
+            --celebration-color-2: #059669;
+            --celebration-color-3: #047857;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--slate-900);
+            color: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .welcome-container {
+            text-align: center;
+            padding: 2rem;
+            z-index: 1;
+        }
+
+        .welcome-message {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--success-color);
+            margin-bottom: 1rem;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .username-display {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--success-color);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            animation: fadeIn 1s ease-in 0.5s;
+        }
+
+        .logout-button {
+            padding: 1rem 2rem;
+            background-color: var(--slate-300);
+            color: var(--slate-900);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            animation: fadeIn 1s ease-in 1s;
+        }
+
+        .logout-button:hover {
+            background-color: var(--white);
+            color: var(--slate-900);
+        }
+
+        /* Floating Celebration Elements */
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .floating-element {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: floatDown 3s linear infinite;
+        }
+
+        .element-1 { background-color: var(--celebration-color-1); }
+        .element-2 { background-color: var(--celebration-color-2); }
+        .element-3 { background-color: var(--celebration-color-3); }
+
+        @keyframes floatDown {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 0.8;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-element element-1" style="top: 20%; left: 30%; animation-delay: 0.5s;"></div>
+        <div class="floating-element element-2" style="top: 40%; left: 50%; animation-delay: 1s;"></div>
+        <div class="floating-element element-3" style="top: 60%; left: 20%; animation-delay: 1.5s;"></div>
+        <div class="floating-element element-1" style="top: 80%; left: 60%; animation-delay: 2s;"></div>
+        <div class="floating-element element-2" style="top: 20%; left: 80%; animation-delay: 2.5s;"></div>
+        <div class="floating-element element-3" style="top: 40%; left: 10%; animation-delay: 3s;"></div>
+    </div>
+    <div class="welcome-container">
+        <div class="welcome-message">Welcome Back!</div>
+        <div id="usernameDisplay" class="username-display"></div>
+        <button onclick="logout()" class="logout-button">Logout</button>
+    </div>
+
+    <script>
+        // Get username from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const username = urlParams.get('username');
+        
+        if (username) {
+            document.getElementById('usernameDisplay').textContent = username;
+        }
+
+        function logout() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

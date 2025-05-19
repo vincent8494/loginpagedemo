@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        :root {
+            --slate-900: #1f2937;
+            --slate-300: #d1d5db;
+            --white: #ffffff;
+            --primary-color: #4f46e5;
+            --secondary-color: #818cf8;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+            --celebration-color-1: #10b981;
+            --celebration-color-2: #059669;
+            --celebration-color-3: #047857;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--slate-300);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .background-balls {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .background-ball {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--slate-900);
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.4);
+            animation: backgroundBounce 4s infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes backgroundBounce {
+            0%, 100% {
+                transform: translateY(0) scale(1) rotate(0deg);
+                animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+            }
+            25% {
+                transform: translateY(-100px) scale(0.9) rotate(45deg);
+                animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+                opacity: 0.4;
+            }
+            50% {
+                transform: translateY(-150px) scale(0.8) rotate(90deg);
+                animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+                opacity: 0.35;
+            }
+            75% {
+                transform: translateY(-100px) scale(0.9) rotate(135deg);
+                animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+                opacity: 0.4;
+            }
+        }
+
+        .login-container {
+            background-color: var(--slate-900);
+            padding: 2rem;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--white);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 6px;
+            background-color: var(--slate-300);
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+        }
+
+        .shake-animation {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .login-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .login-button:hover::before {
+            left: 100%;
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+            padding: 0.5rem;
+            border-radius: 6px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .ball-1 { animation-delay: 0s; animation-duration: 2.5s; }
+        .ball-2 { animation-delay: 0.2s; animation-duration: 3s; }
+        .ball-3 { animation-delay: 0.4s; animation-duration: 3.5s; }
+        .ball-4 { animation-delay: 0.6s; animation-duration: 2.8s; }
+        .ball-5 { animation-delay: 0.8s; animation-duration: 3.2s; }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+        }
+
+        .success-message {
+            color: var(--success-color);
+            background-color: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--success-color);
+        }
+
+        .error-message {
+            color: var(--error-color);
+            background-color: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--error-color);
+        }
+
+        .attempt-counter {
+            color: var(--white);
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .bouncing-balls {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .ball {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--slate-300);
+            box-shadow: 0 4px 15px rgba(210, 217, 224, 0.4);
+            animation: bounce 3s infinite;
+            opacity: 0.9;
+            z-index: -1;
+        }
+
+        /* Wave-like animation delays */
+        .ball-1 { animation-delay: 0s; animation-duration: 3s; }
+        .ball-2 { animation-delay: 0.2s; animation-duration: 3.2s; }
+        .ball-3 { animation-delay: 0.4s; animation-duration: 3.4s; }
+        .ball-4 { animation-delay: 0.6s; animation-duration: 3.6s; }
+        .ball-5 { animation-delay: 0.8s; animation-duration: 3.8s; }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0) scale(1) rotate(0deg);
+                animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+            }
+            25% {
+                transform: translateY(-100px) scale(0.9) rotate(45deg);
+                animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+                opacity: 0.95;
+            }
+            50% {
+                transform: translateY(-150px) scale(0.8) rotate(90deg);
+                animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+                opacity: 0.9;
+            }
+            75% {
+                transform: translateY(-100px) scale(0.9) rotate(135deg);
+                animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+                opacity: 0.95;
+            }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .background-balls {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .background-ball {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--slate-900);
+            box-shadow: 0 4px 15px rgba(210, 217, 224, 0.4);
+            animation: bounce 3s infinite;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-balls">
+        <div class="background-ball" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="background-ball" style="left: 30%; animation-delay: 0.4s;"></div>
+        <div class="background-ball" style="left: 50%; animation-delay: 0.8s;"></div>
+        <div class="background-ball" style="left: 70%; animation-delay: 1.2s;"></div>
+        <div class="background-ball" style="left: 90%; animation-delay: 1.6s;"></div>
+    </div>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>Login</h1>
+        </div>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="button-container">
+                <button type="submit" class="login-button">Sign In</button>
+            </div>
+            <div class="attempt-counter">Attempts remaining: 3</div>
+        </form>
+        <div class="bouncing-balls">
+            <div class="ball ball-1" style="left: 20%;"></div>
+            <div class="ball ball-2" style="left: 40%;"></div>
+            <div class="ball ball-3" style="left: 60%;"></div>
+            <div class="ball ball-4" style="left: 80%;"></div>
+            <div class="ball ball-5" style="left: 10%;"></div>
+        </div>
+        <div id="message" class="message"></div>
+    </div>
+
+    <script>
+        let attempts = 3;
+        let timer = null;
+        const loginForm = document.getElementById('loginForm');
+        const messageElement = document.getElementById('message');
+        const attemptCounter = document.querySelector('.attempt-counter');
+        const passwordInput = document.getElementById('password');
+
+        function startTimer() {
+            let timeLeft = 30;
+            messageElement.className = 'message error-message';
+            messageElement.textContent = `Too many failed attempts! Please wait ${timeLeft} seconds.`;
+            
+            if (timer) {
+                clearInterval(timer);
+            }
+
+            timer = setInterval(() => {
+                timeLeft--;
+                if (timeLeft > 0) {
+                    messageElement.textContent = `Too many failed attempts! Please wait ${timeLeft} seconds.`;
+                } else {
+                    clearInterval(timer);
+                    messageElement.textContent = 'Resetting...';
+                    messageElement.className = 'message'; // Reset class to remove error styling
+                    messageElement.style.animation = 'fadeOut 0.5s ease-out';
+                    
+                    // Wait for animation to complete before resetting
+                    setTimeout(() => {
+                        messageElement.textContent = '';
+                        messageElement.style.animation = '';
+                        loginForm.style.pointerEvents = 'auto';
+                        loginForm.style.opacity = '1';
+                        attempts = 3;
+                        attemptCounter.textContent = `Attempts remaining: ${attempts}`;
+                    }, 500);
+                }
+            }, 1000);
+        }
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const isValid = username === 'admin' && password === 'password';
+
+            if (!isValid) {
+                attempts--;
+                attemptCounter.textContent = `Attempts remaining: ${attempts}`;
+                
+                if (attempts === 0) {
+                    loginForm.style.pointerEvents = 'none';
+                    loginForm.style.opacity = '0.5';
+                    startTimer();
+                } else {
+                    messageElement.className = 'message error-message';
+                    if (username !== 'admin') {
+                        messageElement.textContent = 'Invalid username! Please try again.';
+                    } else {
+                        messageElement.textContent = 'Invalid password! Please try again.';
+                    }
+                    passwordInput.classList.add('shake-animation');
+                    
+                    setTimeout(() => {
+                        passwordInput.classList.remove('shake-animation');
+                    }, 500);
+                }
+            } else {
+                messageElement.className = 'message success-message';
+                messageElement.textContent = 'Login successful! Redirecting...';
+                
+                setTimeout(() => {
+                    window.location.href = `welcome.html?username=${encodeURIComponent(username)}`;
+                }, 1000);
+            }
+        });
+
+        loginForm.addEventListener('animationend', (e) => {
+            if (e.animationName === 'slideIn') {
+                setTimeout(() => {
+                    messageElement.textContent = '';
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
